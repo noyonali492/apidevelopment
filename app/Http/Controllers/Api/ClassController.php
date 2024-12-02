@@ -24,7 +24,15 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $validated = $request->validate([
+        //     'class_name' => 'required|unique:posts|max:50',
+            
+        // ]);
+
+        $data=array();
+        $data['class_name']=$request->class_name;
+        DB::table('classes')->insert($data);
+        return response('done');
     }
 
     /**
