@@ -40,7 +40,8 @@ class ClassController extends Controller
      */
     public function show(string $id)
     {
-        //
+       $showData= DB::table('classes')->where('id',$id)->first();
+       return response()->json($showData);
     }
 
     /**
