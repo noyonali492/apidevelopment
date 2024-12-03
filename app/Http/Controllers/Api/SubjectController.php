@@ -13,7 +13,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        $subject =Subject::all();
+        return response()->json($subject);
     }
 
   
@@ -25,7 +26,7 @@ class SubjectController extends Controller
     {
         $validated = $request->validate([
             'subject_name' => 'required|unique:subjects|max:50',
-            'class_id' => 'required|unique:subjects|max:50',
+            // 'class_id' => 'required|unique:subjects|max:50',
         ]);
 
         $subject = Subject::create($request->all());
@@ -37,7 +38,8 @@ class SubjectController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $show= Subject::findorfail($id);
+        return response()->json($show);
     }
 
    
@@ -47,7 +49,9 @@ class SubjectController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       $subject = Subject::findorfail($id);
+       $subject->update($request->all());
+       return response('Updated');
     }
 
     /**
@@ -55,6 +59,7 @@ class SubjectController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Subject::where('id',$id)->delete();
+        return response('deleted');
     }
 }
