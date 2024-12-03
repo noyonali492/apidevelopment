@@ -24,10 +24,10 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        // $validated = $request->validate([
-        //     'class_name' => 'required|unique:posts|max:50',
+        $validated = $request->validate([
+            'class_name' => 'required|unique:classes|max:50',
             
-        // ]);
+        ]);
 
         $data=array();
         $data['class_name']=$request->class_name;
@@ -60,6 +60,7 @@ class ClassController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table('classes')->where('id',$id)->delete();
+        return response('Deleted');
     }
 }
