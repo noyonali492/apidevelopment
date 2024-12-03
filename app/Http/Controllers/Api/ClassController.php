@@ -53,7 +53,11 @@ class ClassController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data=array();
+        $data['class_name']=$request->class_name;
+
+        DB::table('classes')->where('id',$id)->update($data);
+        return response('Updated');
     }
 
     /**
